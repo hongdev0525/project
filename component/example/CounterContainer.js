@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { countAdd, countSubstract } from "/modules/example/Counter";
 
-// import React, { useEffect } from "react";
-
 const CounterContainer = () => {
   const state = useSelector(state => {
     return state.Counter.count;
@@ -15,7 +13,6 @@ const CounterContainer = () => {
     },
     [state]
   );
-
   const handleAdd = () => {
     dispatch(countAdd());
   };

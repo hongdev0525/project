@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { all } from "redux-saga/effects";
 import { HYDRATE } from "next-redux-wrapper";
 import Counter from "../modules/example/Counter";
 
