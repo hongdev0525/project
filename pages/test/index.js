@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-const index = ({ data }) => {
+const TestPage = ({ data }) => {
   useEffect(
     () => {
       console.log(data);
@@ -39,4 +39,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default index;
+export default TestPage;

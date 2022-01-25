@@ -4,7 +4,7 @@ import styles from "/styles/cueat/signin.module.scss";
 import DaumPost from "/component/common/DaumPostCode";
 import { useRouter } from "next/router";
 
-const index = () => {
+const Signin = () => {
   const router = useRouter();
   const [isIdDuplicate, setIsIdDuplicate] = useState("");
   const [isPasswordSame, setIsPasswordSame] = useState("");
@@ -537,4 +537,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Signin;

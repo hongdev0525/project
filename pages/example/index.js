@@ -1,6 +1,6 @@
 import CounterContainer from "/component/example/CounterContainer";
-const index = () => {
+const Example = () => {
   return <CounterContainer />;
 };
 
-export default index;
+export default Example;

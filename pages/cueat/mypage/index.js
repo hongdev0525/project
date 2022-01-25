@@ -1,6 +1,6 @@
 import MypageLayout from "/component/cueat/mypage/MypageLayout.js";
-const index = () => {
+const Mypage = () => {
   return <MypageLayout />;
 };
 
-export default index;
+export default Mypage;

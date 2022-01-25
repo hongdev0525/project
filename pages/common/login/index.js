@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import axios from "axios";
 import Router from "next/router";
-
-const index = () => {
+import Img from "next/image";
+const Login = () => {
   const handleLogin = e => {
     e.preventDefault();
     Kakao.Auth.login({
@@ -60,7 +60,7 @@ const index = () => {
     <div>
       <h1>로그인페이지</h1>
       <div onClick={e => handleLogin(e)}>
-        <img
+        <Img
           src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
           width="242"
         />
@@ -76,4 +76,4 @@ export async function getStaticProps(context) {
   };
 }
 
-export default index;
+export default Login;
