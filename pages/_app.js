@@ -1,5 +1,5 @@
 import { wrapper } from "../modules/store";
-import Layout from "../component/common/layout";
+import Layout from "../component/common/Layout";
 import "../styles/globals.css";
 
 const App = ({ Component, pageProps }) => {
