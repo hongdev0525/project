@@ -44,7 +44,7 @@ const index = () => {
 
   const checkId = async () => {
     await axios({
-      url: "http://localhost:3000/signin/id",
+      url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/id`,
       method: "get",
       params: {
         userId: userInfo["user-id"]
@@ -94,7 +94,7 @@ const index = () => {
     if (userName.length !== 0 && userPhone.length !== 0) {
       await axios({
         method: "post",
-        url: process.env.NEXT_PUBLIC_SERVICE_URL + "/signin/phone",
+        url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/phone`,
         data: {
           userPhone: userPhone,
           userName: userName
@@ -302,7 +302,7 @@ const index = () => {
     } else {
       await axios({
         method: "post",
-        url: "http://localhost:3000/signin/create",
+        url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/create`,
         data: userInfo
       })
         .then(res => {
