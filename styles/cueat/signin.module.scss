@@ -1,13 +1,30 @@
 .signin-wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   label {
     display: block;
     margin: 10px 0;
+    span {
+      color: tomato;
+    }
   }
-  input {
-    margin-right: 20px;
+  .validation-warning {
+    font-size: 14px;
+    color: tomato;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="e-mail"],
+  input[type="number"] {
+    width: 300px;
+    padding: 5px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    outline: none;
+    margin: 8px 16px 8px 0;
   }
   .sigin-gender {
     border-color: tomato;
@@ -16,6 +33,22 @@
       align-items: center;
       div {
       }
+    }
+  }
+  .postCode-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    .post-code {
+      width: 500px !important;
     }
   }
 }

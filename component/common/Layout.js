@@ -5,7 +5,7 @@ import Logout from "./Logout";
 
 const Layout = ({ children }) => {
   useEffect(() => {
-    loginCheck();
+    // loginCheck();
   }, []);
 
   return (
