@@ -1,0 +1,16 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .login-container {
+    margin: 20px 0;
+    label {
+      display: block;
+      width: 100px;
+    }
+    input {
+      margin: 20px 0;
+    }
+  }
+}
