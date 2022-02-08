@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAuthNumber, checkAuth } from "../../modules/common/login";
-const AuthPhoneNumber = () => {
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAuthNumber,
+  checkAuth,
+  expireAuth
+} from "../../modules/common/login";
+import { getInquiryId } from "../../modules/common/userInquiry";
+import { setInitialState } from "../../modules/common/timer";
+import styles from "/styles/common/authPhoneNumber.module.scss";
+import Timer from "./Timer";
+const AuthPhoneNumber = ({ authObj, authType }) => {
   ///variable
   const dispatch = useDispatch();
   const [authNumber, setAuthNumber] = useState("");
@@ -15,11 +23,9 @@ const AuthPhoneNumber = () => {
       validation: false
     }
   });
-
-  const authObj = useSelector(state => {
-    return state.Logins;
+  const timetObj = useSelector(state => {
+    return state.Timer;
   });
-
   //function
   const authPhoneNumber = () => {
     if (
@@ -53,6 +59,14 @@ const AuthPhoneNumber = () => {
   const checkAuthDone = () => {
     if (authObj.authNumber === parseInt(authNumber)) {
       dispatch(checkAuth());
+      dispatch(
+        getInquiryId(
+          userInfo["user-name"].value,
+          userInfo["user-phone"].value,
+          authObj.inquiryToken
+        )
+      );
+      dispatch(setInitialState(0, 10));
     } else {
       alert("인증번호가 틀렸습니다.");
     }
@@ -60,57 +74,61 @@ const AuthPhoneNumber = () => {
 
   useEffect(
     () => {
-      console.log(userInfo);
+      if (timetObj.seconds === 0 && timetObj.minutes === 0) {
+        dispatch(expireAuth());
+      }
     },
-    [userInfo]
+    [timetObj]
   );
 
   /*JSX*/
   return (
-    <div>
-      <div>
-        <label htmlFor="user-name">이름</label>
-        <input
-          type="text"
-          name="user-name"
-          id="user-id"
-          onChange={e => handleUserInfo(e)}
-        />
-      </div>
-      <div>
-        <label htmlFor="user-phone">핸드폰 번호</label>
-        <div>
-          <input
-            type="text"
-            name="user-phone"
-            id="user-phone"
-            onChange={e => {
-              handleUserInfo(e);
-            }}
-          />
-          <button type="button" onClick={() => authPhoneNumber()}>
-            인증번호받기
-          </button>
+    <div className={styles["authPhone-wrapper"]}>
+      <div className={styles["authPhone-container"]}>
+        <div className={styles["user-name"]}>
+          <label htmlFor="user-name">이름</label>
+          <div className={styles["input-name"]}>
+            <input
+              type="text"
+              name="user-name"
+              id="user-id"
+              onChange={e => handleUserInfo(e)}
+            />
+          </div>
         </div>
-      </div>
-      <div>
+        <div className={styles["user-phone"]}>
+          <label htmlFor="user-phone">핸드폰 번호</label>
+          <div className={styles["input-phone"]}>
+            <input
+              type="text"
+              name="user-phone"
+              id="user-phone"
+              onChange={e => {
+                handleUserInfo(e);
+              }}
+            />
+            <button type="button" onClick={() => authPhoneNumber()}>
+              인증번호받기
+            </button>
+          </div>
+        </div>
         {authObj.inAuth == true &&
           authObj.authDone == false &&
-          <div>
+          <div className={styles["auth-number"]}>
             <label htmlFor="auth-number">인증번호</label>
-            <input
-              type="number"
-              name="auth-number"
-              id="auth-number"
-              onChange={e => checkAuthNumber(e)}
-            />
-            <button type="button" onClick={checkAuthDone}>
-              인증하기
-            </button>
+            <div className={styles["input-auth"]}>
+              <input
+                type="number"
+                name="auth-number"
+                id="auth-number"
+                onChange={e => checkAuthNumber(e)}
+              />
+              <Timer mm={0} ss={20} />
+              <button type="button" onClick={checkAuthDone}>
+                인증하기
+              </button>
+            </div>
           </div>}
-        {authObj.inAuth == false &&
-          authObj.authDone === true &&
-          <span>인증완료</span>}
       </div>
     </div>
   );

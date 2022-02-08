@@ -1,0 +1,53 @@
+@import "/styles/common_mixin.module.scss";
+
+.authPhone-wrapper {
+  @include flexMiddle;
+  .authPhone-container {
+    width: 100%;
+    label {
+      display: block;
+      width: 30%;
+    }
+    .user-name {
+      @include flexStart;
+      width: 100%;
+      margin: 16px 0;
+      .input-name {
+        input {
+          width: 200px;
+        }
+      }
+    }
+    .user-phone {
+      @include flexStart;
+      width: 100%;
+      margin: 16px 0;
+
+      .input-phone {
+        @include flexSpaceBetween;
+        width: 70%;
+        input {
+          width: 200px;
+        }
+        button {
+          width: 30%;
+        }
+      }
+    }
+    .auth-number {
+      @include flexStart;
+      width: 100%;
+      margin: 16px 0;
+      .input-auth {
+        @include flexSpaceBetween;
+        width: 70%;
+        input {
+          width: 200px;
+        }
+        button {
+          width: 30%;
+        }
+      }
+    }
+  }
+}

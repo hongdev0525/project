@@ -1,4 +1,3 @@
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
 import { call, put } from "redux-saga/effects";
 
 const createRequestSage = (type, request) => {

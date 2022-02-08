@@ -1,0 +1,93 @@
+// 메리 다이슨의 문장 길이 연구에서 45자 ~ 72자 정도의 짧은 길이를 선호
+//
+
+//Font Colors
+$font01: #232323;
+$font02: #333333;
+$font03: #666666;
+$font04: #999999;
+
+//Font Weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$bold: 700;
+$black: 900;
+
+//Border Color
+$border01: #232323;
+$border02: #666666;
+$border02: #e5e5e5;
+
+@mixin flex {
+  display: flex;
+}
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+}
+@mixin flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+@mixin flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+@mixin flexMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin flexSpaceAround {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+@mixin vflex {
+  display: flex;
+  flex-direction: column;
+}
+@mixin vflexCenter {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+@mixin vflexMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@mixin vflexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+@mixin vflexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+}
+@mixin vflexSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+@mixin vflexSpaceBetween {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
