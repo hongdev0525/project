@@ -2,9 +2,23 @@ import { takeLatest } from "redux-saga/effects";
 import createRequestSage from "../../createRequestSaga";
 import { idInquiry } from "/API/common/userInquiry";
 
+const IDINQUIRY_INITIALIZE = "inquiry/IDINQUIRY_INITIALIZE";
 const GET_INQUIRY_ID = "inquiry/GET_INQUIRY_ID";
 const GET_INQUIRY_ID_SUCCESS = "inquiry/GET_INQUIRY_ID_SUCCESS";
 const GET_INQUIRY_ID_FAILURE = "inquiry/GET_INQUIRY_ID_FAILURE";
+
+export const idInquiryInitialize = () => {
+  return {
+    type: IDINQUIRY_INITIALIZE,
+    payload: {
+      id: "",
+      inAuth: false,
+      AuthDone: false,
+      isExist: "",
+      error: ""
+    }
+  };
+};
 
 export const getInquiryId = (userName, userPhone, inquiryToken) => {
   return {
@@ -33,6 +47,8 @@ let initialState = {
 
 const IdInquiry = (state = initialState, action) => {
   switch (action.type) {
+    case IDINQUIRY_INITIALIZE:
+      return action.payload;
     case GET_INQUIRY_ID_SUCCESS:
       return {
         ...state,

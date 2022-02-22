@@ -8,6 +8,7 @@ import PwdInquiry, {
 import IdInquiry, {
   idInquirySaga
 } from "../modules/common/userInquiry/idInquiry";
+import KakaoPay, { kakaopaySaga } from "../modules/common/payment/kakaopay";
 import Timer from "./common/timer";
 
 const rootReducer = (state, action) => {
@@ -19,6 +20,7 @@ const rootReducer = (state, action) => {
     Logins,
     IdInquiry,
     PwdInquiry,
+    KakaoPay,
     Timer
   })(state, action);
 };
@@ -27,7 +29,8 @@ export function* rootSaga() {
   yield all([
     loginSaga(),
     idInquirySaga(),
-    pwdInquirySaga()
+    pwdInquirySaga(),
+    kakaopaySaga()
     //여기에 사가 등록
   ]);
 }

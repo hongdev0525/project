@@ -1,9 +1,12 @@
 import AuthPhoneNumber from "../AuthPhoneNumber";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { idExistCheck, setNewPassword } from "/modules/common/userInquiry";
+import {
+  idExistCheck,
+  setNewPassword,
+  pwdInquiryInitialize
+} from "/modules/common/userInquiry/pwdInquiry";
 import Router from "next/router";
-import Timer from "../Timer";
 
 const PwdInquiry = () => {
   const dispatch = useDispatch();
@@ -72,6 +75,7 @@ const PwdInquiry = () => {
     dispatch(idExistCheck(userInfo["user-id"]));
   };
   const setPassword = () => {
+    ///비밀번호 중복 체크 로직 확인 후 수정 필요.
     if (passwordCheck === false) {
       alert("비밀번호를 정확히 입력해주세요.");
     } else {
@@ -81,23 +85,29 @@ const PwdInquiry = () => {
 
   useEffect(
     () => {
-      console.log(userInfo);
-
       if (userInquiry.isExist === true) {
         setPwdStep(1);
       }
       if (authObj.authDone === true) {
         setPwdStep(2);
       }
-      if (userInquiry.pwdDuplicate === true) {
-        alert("기존 비밀번호와 동일합니다.");
-      }
+
       if (userInquiry.setDone === true && userInquiry.pwdDuplicate === false) {
         alert("비밀번호가 변경되었습니다.");
+        dispatch(pwdInquiryInitialize());
         Router.push("/common/login");
       }
     },
     [authObj, userInquiry, userInfo]
+  );
+
+  useEffect(
+    () => {
+      if (userInquiry.pwdDuplicate === true) {
+        alert("기존 비밀번호와 동일합니다.");
+      }
+    },
+    [userInquiry.pwdDuplicate]
   );
 
   return (

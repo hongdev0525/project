@@ -58,15 +58,11 @@ export const checkAuth = () => {
   };
 };
 
-console.log("asdfasdfsadf");
-
 /**Saga */
 const authPhoneNumberSaga = createRequestSage(GET_AUTH_NUMBER, authPhoneNumber);
 
 export function* loginSaga() {
-  console.log("asg12321415");
   yield takeLatest(GET_AUTH_NUMBER, authPhoneNumberSaga);
-  console.log("asg12321415");
 }
 
 let initialState = {

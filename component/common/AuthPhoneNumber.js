@@ -5,7 +5,7 @@ import {
   checkAuth,
   expireAuth
 } from "../../modules/common/login";
-import { getInquiryId } from "../../modules/common/userInquiry";
+import { getInquiryId } from "../../modules/common/userInquiry/idInquiry";
 import { setInitialState } from "../../modules/common/timer";
 import styles from "/styles/common/authPhoneNumber.module.scss";
 import Timer from "./Timer";
