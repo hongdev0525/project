@@ -118,7 +118,7 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
                 id="auth-number"
                 onChange={(e) => checkAuthNumber(e)}
               />
-              <Timer mm={0} ss={20} />
+              <Timer mm={1} ss={30} />
               <button type="button" onClick={checkAuthDone}>
                 인증하기
               </button>

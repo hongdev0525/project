@@ -5,19 +5,29 @@ import Loading from "./Loading";
 import Logout from "./Logout";
 import Navigation from "./Navigation";
 import styles from "/styles/common/layout.module.scss";
-import { inLoading } from "/modules/common/loading";
+import { setLoading } from "/modules/common/loading";
+import Router from "next/router";
+
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
 
   const loadingStete = useSelector((state) => {
     return state.LoadingSpinner.loadingState;
   });
+
+  Router.events.on("routeChangeStart", () => {
+    dispatch(setLoading(true));
+  });
+  Router.events.on("routeChangeComplete", () => {
+    dispatch(setLoading(false));
+  });
+
   useEffect(() => {
     loginCheck();
   }, []);
 
   const testSpinner = () => {
-    dispatch(inLoading());
+    dispatch(setLoading(!loadingStete));
   };
 
   return (

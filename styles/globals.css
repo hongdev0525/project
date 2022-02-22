@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -117,8 +117,12 @@ nav,
 section {
   display: block;
 }
+html {
+  font-size: 10px;
+}
 body {
   line-height: 1;
+  font-size: 1.6rem;
 }
 ol,
 ul {
@@ -141,4 +145,27 @@ table {
 }
 a {
   text-decoration: none;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  color: #555555;
+  background-color: #fefefe;
+  border: 1px solid #e5e5e5;
+  font-size: 1.6rem;
+  letter-spacing: 0.25rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  cursor: pointer;
 }

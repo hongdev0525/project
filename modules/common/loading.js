@@ -1,13 +1,8 @@
 /* action type */
-const IN_LOADING = "loading/IN_LOADING";
-const END_LOADING = "loading/END_LOADING";
+const SET_LOADING = "loading/SET_LOADING";
 
-export const inLoading = () => {
-  return { type: IN_LOADING };
-};
-
-export const endLoading = () => {
-  return { type: END_LOADING };
+export const setLoading = (state) => {
+  return { type: SET_LOADING, state: state };
 };
 
 let initialState = {
@@ -16,10 +11,8 @@ let initialState = {
 
 const LoadingSpinner = (state = initialState, action) => {
   switch (action.type) {
-    case IN_LOADING:
-      return { ...state, loadingState: true };
-    case END_LOADING:
-      return { ...state, loadingState: false };
+    case SET_LOADING:
+      return { ...state, loadingState: action.state };
     default:
       return state;
   }

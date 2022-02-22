@@ -5,18 +5,18 @@ const LoginInput = ({ styles }) => {
   const router = useRouter();
   const [loginInfo, setLoginInfo] = useState({
     "user-id": "",
-    "user-password": ""
+    "user-password": "",
   });
 
   const [loginValidation, setLoginValidation] = useState({
     "user-id": false,
-    "user-password": false
+    "user-password": false,
   });
 
   const seValidation = (name, status) => {
     setLoginValidation({
       ...loginValidation,
-      [name]: status
+      [name]: status,
     });
   };
 
@@ -41,13 +41,13 @@ const LoginInput = ({ styles }) => {
     }
   };
 
-  const handleLoginInfo = e => {
+  const handleLoginInfo = (e) => {
     const inputName = e.target.name;
     const inputValue = e.target.value;
 
     setLoginInfo({
       ...loginInfo,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
     handleValidation(inputName, inputValue);
   };
@@ -60,11 +60,11 @@ const LoginInput = ({ styles }) => {
     } else {
       await axios({
         method: "post",
-        url: `${process.env.NEXT_PUBLIC_API_SERVER}/login`,
+        url: `${process.env.NEXT_PUBLIC_API_SERVER}/logins`,
         data: loginInfo,
-        withCredentials: true
+        withCredentials: true,
       })
-        .then(res => {
+        .then((res) => {
           const error = res.data.error;
           const status = res.data.status;
           if (status === "fail") {
@@ -81,19 +81,16 @@ const LoginInput = ({ styles }) => {
             router.push("/");
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
   };
 
-  useEffect(
-    () => {
-      console.log(loginInfo);
-      console.log("loginValidation", loginValidation);
-    },
-    [loginInfo, loginValidation]
-  );
+  useEffect(() => {
+    console.log(loginInfo);
+    console.log("loginValidation", loginValidation);
+  }, [loginInfo, loginValidation]);
 
   return (
     <div className={styles["login-container"]}>
@@ -103,7 +100,7 @@ const LoginInput = ({ styles }) => {
           type="text"
           name="user-id"
           id="user-id"
-          onChange={e => handleLoginInfo(e)}
+          onChange={(e) => handleLoginInfo(e)}
         />
       </div>
       <div>
@@ -112,7 +109,7 @@ const LoginInput = ({ styles }) => {
           type="password"
           name="user-password"
           id="user-password"
-          onChange={e => handleLoginInfo(e)}
+          onChange={(e) => handleLoginInfo(e)}
         />
       </div>
       <div>
