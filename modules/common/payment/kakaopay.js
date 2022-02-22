@@ -11,7 +11,7 @@ const KAKAOPAY_PAYMENT_REQUERT_FIALURE =
 export const kakaopayRequest = (orderInfo, url) => {
   return {
     type: KAKAOPAY_PAYMENT_REQUERT,
-    payload: { orderInfo: orderInfo, url: url }
+    payload: { orderInfo: orderInfo, url: url },
   };
 };
 
@@ -21,14 +21,12 @@ const kakaopayRequestSaga = createRequestSage(
 );
 
 export function* kakaopaySaga() {
-  console.log("actionsss");
-
   yield takeLatest(KAKAOPAY_PAYMENT_REQUERT, kakaopayRequestSaga);
 }
 
 const initialState = {
   paymentResult: {},
-  paymentSuccess: ""
+  paymentSuccess: "",
 };
 
 const KakaoPay = (state = initialState, action) => {
@@ -37,7 +35,7 @@ const KakaoPay = (state = initialState, action) => {
       return {
         ...state,
         paymentResult: action.payload.data,
-        paymentSuccess: action.payload.success
+        paymentSuccess: action.payload.success,
       };
     case KAKAOPAY_PAYMENT_REQUERT_FIALURE:
       return "API ERROR OCCURED";

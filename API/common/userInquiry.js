@@ -1,15 +1,14 @@
 import axios from "axios";
 
 export const setPassword = async ({ userId, userPassword }) => {
-  console.log(userPassword);
   if (userPassword.length !== 0) {
     return await axios({
       method: "post",
       url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/setNewpwd`,
       data: {
         userId: userId,
-        userPassword: userPassword
-      }
+        userPassword: userPassword,
+      },
     });
   }
 };
@@ -20,8 +19,8 @@ export const idExist = async ({ userId }) => {
       method: "get",
       url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/idCheck`,
       params: {
-        userId: userId
-      }
+        userId: userId,
+      },
     });
   }
 };
@@ -38,8 +37,8 @@ export const idInquiry = async ({ userName, userPhone, inquiryToken }) => {
       data: {
         userPhone: userPhone,
         userName: userName,
-        inquiryToken: inquiryToken
-      }
+        inquiryToken: inquiryToken,
+      },
     });
   }
 };

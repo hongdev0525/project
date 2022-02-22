@@ -3,25 +3,27 @@ import { all } from "redux-saga/effects";
 import { HYDRATE } from "next-redux-wrapper";
 import Logins, { loginSaga } from "../modules/common/login";
 import PwdInquiry, {
-  pwdInquirySaga
+  pwdInquirySaga,
 } from "../modules/common/userInquiry/pwdInquiry";
 import IdInquiry, {
-  idInquirySaga
+  idInquirySaga,
 } from "../modules/common/userInquiry/idInquiry";
 import KakaoPay, { kakaopaySaga } from "../modules/common/payment/kakaopay";
 import Timer from "./common/timer";
+import LoadingSpinner from "./common/loading";
 
 const rootReducer = (state, action) => {
   if (action.type === HYDRATE) {
     return { ...state, ...action.payload };
   }
-  //여기에 리듀서 등록
   return combineReducers({
     Logins,
     IdInquiry,
     PwdInquiry,
     KakaoPay,
-    Timer
+    Timer,
+    LoadingSpinner,
+    //여기에 리듀서 등록
   })(state, action);
 };
 
@@ -30,7 +32,7 @@ export function* rootSaga() {
     loginSaga(),
     idInquirySaga(),
     pwdInquirySaga(),
-    kakaopaySaga()
+    kakaopaySaga(),
     //여기에 사가 등록
   ]);
 }

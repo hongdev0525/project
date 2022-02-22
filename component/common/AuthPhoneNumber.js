@@ -3,27 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAuthNumber,
   checkAuth,
-  expireAuth
+  expireAuth,
 } from "../../modules/common/login";
 import { getInquiryId } from "../../modules/common/userInquiry/idInquiry";
 import { setInitialState } from "../../modules/common/timer";
 import styles from "/styles/common/authPhoneNumber.module.scss";
 import Timer from "./Timer";
 const AuthPhoneNumber = ({ authObj, authType }) => {
-  ///variable
   const dispatch = useDispatch();
   const [authNumber, setAuthNumber] = useState("");
   const [userInfo, setUserInfo] = useState({
     "user-name": {
       value: "",
-      validation: false
+      validation: false,
     },
     "user-phone": {
       value: "",
-      validation: false
-    }
+      validation: false,
+    },
   });
-  const timetObj = useSelector(state => {
+  const timetObj = useSelector((state) => {
     return state.Timer;
   });
   //function
@@ -40,7 +39,7 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
     }
   };
 
-  const handleUserInfo = e => {
+  const handleUserInfo = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserInfo({
@@ -48,12 +47,12 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
       [name]: {
         ...userInfo[name],
         value: value,
-        validation: value.length === 0 ? false : true
-      }
+        validation: value.length === 0 ? false : true,
+      },
     });
   };
 
-  const checkAuthNumber = e => {
+  const checkAuthNumber = (e) => {
     setAuthNumber(e.target.value);
   };
   const checkAuthDone = () => {
@@ -72,14 +71,11 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
     }
   };
 
-  useEffect(
-    () => {
-      if (timetObj.seconds === 0 && timetObj.minutes === 0) {
-        dispatch(expireAuth());
-      }
-    },
-    [timetObj]
-  );
+  useEffect(() => {
+    if (timetObj.seconds === 0 && timetObj.minutes === 0) {
+      dispatch(expireAuth());
+    }
+  }, [timetObj]);
 
   /*JSX*/
   return (
@@ -92,7 +88,7 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
               type="text"
               name="user-name"
               id="user-id"
-              onChange={e => handleUserInfo(e)}
+              onChange={(e) => handleUserInfo(e)}
             />
           </div>
         </div>
@@ -103,7 +99,7 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
               type="text"
               name="user-phone"
               id="user-phone"
-              onChange={e => {
+              onChange={(e) => {
                 handleUserInfo(e);
               }}
             />
@@ -112,8 +108,7 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
             </button>
           </div>
         </div>
-        {authObj.inAuth == true &&
-          authObj.authDone == false &&
+        {authObj.inAuth == true && authObj.authDone == false && (
           <div className={styles["auth-number"]}>
             <label htmlFor="auth-number">인증번호</label>
             <div className={styles["input-auth"]}>
@@ -121,14 +116,15 @@ const AuthPhoneNumber = ({ authObj, authType }) => {
                 type="number"
                 name="auth-number"
                 id="auth-number"
-                onChange={e => checkAuthNumber(e)}
+                onChange={(e) => checkAuthNumber(e)}
               />
               <Timer mm={0} ss={20} />
               <button type="button" onClick={checkAuthDone}>
                 인증하기
               </button>
             </div>
-          </div>}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const SignIn = () => {
   const [authNumber, setAuthNumber] = useState({
     authrizing: false,
     number: "",
-    authDone: false
+    authDone: false,
   });
 
   const [userInfo, setUserInfo] = useState({
@@ -25,7 +25,7 @@ const SignIn = () => {
     "user-mainAddress": "",
     "user-subAddress": "",
     "user-birthDay": "",
-    "user-gender": ""
+    "user-gender": "",
     // usageAgreement: ""
   });
 
@@ -39,7 +39,7 @@ const SignIn = () => {
     "user-name": "",
     "user-password": "",
     "user-phone": "",
-    "user-subAddress": ""
+    "user-subAddress": "",
   });
 
   const checkId = async () => {
@@ -47,10 +47,10 @@ const SignIn = () => {
       url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/id`,
       method: "get",
       params: {
-        userId: userInfo["user-id"]
-      }
+        userId: userInfo["user-id"],
+      },
     })
-      .then(res => {
+      .then((res) => {
         if (res.data.status === "success") {
           setIsIdDuplicate(false);
           alert("사용할 수 있는 아이디입니다.");
@@ -59,12 +59,12 @@ const SignIn = () => {
           alert("아이디가 중복됩니다.");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  const passwordCheck = e => {
+  const passwordCheck = (e) => {
     if (e.target.value !== userInfo["user-password"]) {
       setIsPasswordSame(false);
     } else {
@@ -72,13 +72,13 @@ const SignIn = () => {
     }
   };
 
-  const onChnageInput = e => {
+  const onChnageInput = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
     formValidation(e.target.name, e.target.value);
   };
 
   //Deal the handleKeypress Enter
-  const handleKeypress = e => {
+  const handleKeypress = (e) => {
     switch (e.key) {
       case "Enter":
         checkId();
@@ -97,10 +97,10 @@ const SignIn = () => {
         url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/phone`,
         data: {
           userPhone: userPhone,
-          userName: userName
-        }
+          userName: userName,
+        },
       })
-        .then(res => {
+        .then((res) => {
           const status = res.data.status;
           const error = res.data.error;
           // 중복 로직 새로 짜야함..
@@ -113,18 +113,18 @@ const SignIn = () => {
             setAuthNumber({
               ...authNumber,
               authrizing: true,
-              number: res.data.authNumber
+              number: res.data.authNumber,
             });
             setFormValidtaionState({
               ...formValidationState,
-              ["user-phone"]: true
+              ["user-phone"]: true,
             });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setFormValidtaionState({
             ...formValidationState,
-            ["user-phone"]: false
+            ["user-phone"]: false,
           });
           console.log(err);
         });
@@ -141,7 +141,7 @@ const SignIn = () => {
         ...authNumber,
         authrizing: false,
         number: "",
-        authDone: true
+        authDone: true,
       });
     }
   };
@@ -150,18 +150,10 @@ const SignIn = () => {
     setAddressModal(true);
   };
 
-  //   useEffect(
-  //     () => {
-  //       console.log("userInfo", userInfo);
-  //       console.log("formValidation", formValidationState);
-  //       return () => {};
-  //     },
-  //     [userInfo, formValidationState]
-  //   );
   const setValidation = (name, boolen) => {
     setFormValidtaionState({
       ...formValidationState,
-      [name]: boolen
+      [name]: boolen,
     });
   };
 
@@ -182,7 +174,8 @@ const SignIn = () => {
         break;
 
       case "user-password":
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+        const passwordRegex =
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
         if (passwordRegex.test(value)) {
           if (len < 8 || len > 20) {
             setValidation(name, false);
@@ -201,7 +194,8 @@ const SignIn = () => {
         }
         break;
       case "user-email":
-        const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+        const emailRegex =
+          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
         if (emailRegex.test(value)) {
           setValidation(name, true);
         } else {
@@ -256,12 +250,6 @@ const SignIn = () => {
         break;
     }
   };
-  //   useEffect(
-  //     () => {
-  //       console.log(formValidationState);
-  //     },
-  //     [formValidationState]
-  //   );
 
   const submitFormData = async () => {
     const formDataObj = {};
@@ -272,11 +260,9 @@ const SignIn = () => {
         validation = true;
         validationObj[key] = validation;
       } else if (key === "user-id" && isIdDuplicate === true) {
-        // console.log("isIdDuplicate", isIdDuplicate);
         validation = false;
         validationObj[key] = validation;
       } else if (key === "user-phone" && authNumber.authDone === false) {
-        // console.log("authDone", authNumber.authDone);
         validation = false;
         validationObj[key] = validation;
       } else if (formValidationState[key] !== true) {
@@ -286,7 +272,6 @@ const SignIn = () => {
         validation = true;
         validationObj[key] = validation;
       }
-      //   console.log(key, " validation", validation);
     });
     setFormValidtaionState(validationObj);
     Object.keys(userInfo).forEach((key, index) => {
@@ -298,9 +283,9 @@ const SignIn = () => {
       await axios({
         method: "post",
         url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/create`,
-        data: userInfo
+        data: userInfo,
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.status === "success") {
             alert("회원가입이 성공적으로 됐습니다! 반가워요!");
             router.push("/");
@@ -308,7 +293,7 @@ const SignIn = () => {
             alert("회원가입에 실패했습니다. 잠시후 다시 시도해주세요.");
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           alert("회원가입에 실패했습니다. 잠시후 다시 시도해주세요.");
         });
@@ -329,19 +314,23 @@ const SignIn = () => {
               maxLength={12}
               defaultValue={userInfo.id}
               onChange={onChnageInput}
-              onKeyDown={e => handleKeypress(e)}
+              onKeyDown={(e) => handleKeypress(e)}
               placeholder="영문,숫자 8~12자 조합"
             />
-            <button type="button" onClick={e => checkId(e)} id="user-id-btn">
+            <button type="button" onClick={(e) => checkId(e)} id="user-id-btn">
               중복확인
             </button>
           </div>
-          {isIdDuplicate === true &&
-            <p className={styles["validation-warning"]}>아이디 중복체크를 해주세요.</p>}
-          {formValidationState["user-id"] === false &&
+          {isIdDuplicate === true && (
+            <p className={styles["validation-warning"]}>
+              아이디 중복체크를 해주세요.
+            </p>
+          )}
+          {formValidationState["user-id"] === false && (
             <p className={styles["validation-warning"]}>
               아이디는 영문,숫자 8~12자 조합만 가능합니다.
-            </p>}
+            </p>
+          )}
         </div>
         <div className={styles["sigin-password"]}>
           <label htmlFor="user-password">
@@ -354,10 +343,11 @@ const SignIn = () => {
             placeholder="영문, 숫자, 특수문자 조합 8~20자리"
             onChange={onChnageInput}
           />
-          {formValidationState["user-password"] === false &&
+          {formValidationState["user-password"] === false && (
             <p className={styles["validation-warning"]}>
               영문, 숫자, 특수문자 조합 8~20자리를 입력해주세요.
-            </p>}
+            </p>
+          )}
         </div>
         <div className={styles["sigin-passwordCheck"]}>
           <label htmlFor="user-passwordCheck">
@@ -367,11 +357,14 @@ const SignIn = () => {
             type="password"
             name="user-passwordCheck"
             id="user-passwordCheck"
-            onChange={e => passwordCheck(e)}
+            onChange={(e) => passwordCheck(e)}
             placeholder="비밀번호 확인"
           />
-          {isPasswordSame === false &&
-            <p className={styles["validation-warning"]}>비밀번호가 일치하지 않습니다.</p>}
+          {isPasswordSame === false && (
+            <p className={styles["validation-warning"]}>
+              비밀번호가 일치하지 않습니다.
+            </p>
+          )}
         </div>
         <div className={styles["sigin-name"]}>
           <label htmlFor="user-name">
@@ -381,11 +374,12 @@ const SignIn = () => {
             type="text"
             name="user-name"
             id="user-name"
-            onChange={e => onChnageInput(e)}
+            onChange={(e) => onChnageInput(e)}
             placeholder="이름을 입력해주세요"
           />
-          {formValidationState["user-id"] === false &&
-            <p className={styles["validation-warning"]}>이름을 입력해주세요.</p>}
+          {formValidationState["user-id"] === false && (
+            <p className={styles["validation-warning"]}>이름을 입력해주세요.</p>
+          )}
         </div>
         <div className={styles["sigin-email"]}>
           <label htmlFor="user-email">
@@ -395,11 +389,14 @@ const SignIn = () => {
             type="text"
             name="user-email"
             id="user-email"
-            onChange={e => onChnageInput(e)}
+            onChange={(e) => onChnageInput(e)}
             placeholder="이메일을 입력해주세요"
           />
-          {formValidationState["user-email"] === false &&
-            <p className={styles["validation-warning"]}>이메일을 올바르게 입력해주세요.</p>}
+          {formValidationState["user-email"] === false && (
+            <p className={styles["validation-warning"]}>
+              이메일을 올바르게 입력해주세요.
+            </p>
+          )}
         </div>
         <div className={styles["sigin-phone"]}>
           <label htmlFor="user-phone">
@@ -410,35 +407,40 @@ const SignIn = () => {
               type="text"
               name="user-phone"
               id="user-phone"
-              onChange={e => onChnageInput(e)}
+              onChange={(e) => onChnageInput(e)}
               placeholder="전화번호를 입력해주세요"
             />
-            {authNumber.authDone === false
-              ? <button type="button" onClick={authPhoneNumber}>
-                  {authNumber.authrizing === false
-                    ? "인증번호 받기"
-                    : "인증번호 재전송"}{" "}
-                </button>
-              : <p>인증완료</p>}
+            {authNumber.authDone === false ? (
+              <button type="button" onClick={authPhoneNumber}>
+                {authNumber.authrizing === false
+                  ? "인증번호 받기"
+                  : "인증번호 재전송"}{" "}
+              </button>
+            ) : (
+              <p>인증완료</p>
+            )}
           </div>
           <div>
-            {authNumber.authrizing === true &&
-              (authNumber.authDone == false &&
-                <div>
-                  <input
-                    type="text"
-                    name="auth-number"
-                    id="auth-number"
-                    defaultValue={authInput}
-                    onChange={e => setAuthInput(e.target.value)}
-                  />
-                  <button type="button" onClick={authCheck}>
-                    인증하기
-                  </button>
-                </div>)}
+            {authNumber.authrizing === true && authNumber.authDone == false && (
+              <div>
+                <input
+                  type="text"
+                  name="auth-number"
+                  id="auth-number"
+                  defaultValue={authInput}
+                  onChange={(e) => setAuthInput(e.target.value)}
+                />
+                <button type="button" onClick={authCheck}>
+                  인증하기
+                </button>
+              </div>
+            )}
           </div>
-          {formValidationState["user-phone"] === false &&
-            <p className={styles["validation-warning"]}>핸드폰 인증을 해주세요.</p>}
+          {formValidationState["user-phone"] === false && (
+            <p className={styles["validation-warning"]}>
+              핸드폰 인증을 해주세요.
+            </p>
+          )}
         </div>
         <div className={styles["sigin-mainAddress"]}>
           <label htmlFor="user-mainAddress">
@@ -451,7 +453,7 @@ const SignIn = () => {
               id="user-mainAddress"
               readOnly
               defaultValue={userInfo["user-mainAddress"]}
-              onChange={e => onChnageInput(e)}
+              onChange={(e) => onChnageInput(e)}
               placeholder="주소를 입력해주세요"
             />
             <button type="button" onClick={searchAddress}>
@@ -465,12 +467,15 @@ const SignIn = () => {
             type="text"
             name="user-subAddress"
             id="user-subAddress"
-            onChange={e => onChnageInput(e)}
+            onChange={(e) => onChnageInput(e)}
             placeholder="상세주소를 입력해주세요"
           />
           {(formValidationState["user-mainAddress"] === false ||
-            formValidationState["user-subAddress"] === false) &&
-            <p className={styles["validation-warning"]}>주소 및 상세주소를 입력해주세요.</p>}
+            formValidationState["user-subAddress"] === false) && (
+            <p className={styles["validation-warning"]}>
+              주소 및 상세주소를 입력해주세요.
+            </p>
+          )}
         </div>
         <div className={styles["sigin-birthDay"]}>
           <label htmlFor="user-birthDay">생년월일</label>
@@ -478,11 +483,14 @@ const SignIn = () => {
             type="number"
             name="user-birthDay"
             id="user-birthDay"
-            onChange={e => onChnageInput(e)}
+            onChange={(e) => onChnageInput(e)}
             placeholder="생년월일을 8자리를 입력해주세요 ex)19900525"
           />
-          {formValidationState["user-birthDay"] === false &&
-            <p className={styles["validation-warning"]}>생년월일을 올바르게 입력해주세요.</p>}
+          {formValidationState["user-birthDay"] === false && (
+            <p className={styles["validation-warning"]}>
+              생년월일을 올바르게 입력해주세요.
+            </p>
+          )}
         </div>
         <div className={styles["sigin-gender"]}>
           <label htmlFor="user-gender">성별</label>
@@ -494,7 +502,7 @@ const SignIn = () => {
                 id="user-gender"
                 value="male"
                 checked={userInfo["user-gender"] === "male"}
-                onChange={e => onChnageInput(e)}
+                onChange={(e) => onChnageInput(e)}
               />
               <p>남성</p>
             </div>
@@ -505,7 +513,7 @@ const SignIn = () => {
                 id="user-gender"
                 value="female"
                 checked={userInfo["user-gender"] === "female"}
-                onChange={e => onChnageInput(e)}
+                onChange={(e) => onChnageInput(e)}
               />
               <p>여성</p>
             </div>
@@ -518,7 +526,7 @@ const SignIn = () => {
           가입하기
         </button>
       </div>
-      {addressModal === true &&
+      {addressModal === true && (
         <DaumPost
           userInfo={userInfo}
           setUserInfo={setUserInfo}
@@ -526,7 +534,8 @@ const SignIn = () => {
           setFormValidtaionState={setFormValidtaionState}
           styles={styles}
           setAddressModal={setAddressModal}
-        />}
+        />
+      )}
     </div>
   );
 };

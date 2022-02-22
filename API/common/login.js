@@ -8,49 +8,23 @@ export const authPhoneNumber = async ({ userName, userPhone }) => {
       url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/phone`,
       data: {
         userPhone: userPhone,
-        userName: userName
-      }
+        userName: userName,
+      },
     });
-    // .then(res => {
-    //   const status = res.data.status;
-    //   const error = res.data.error;
-    //   if (status === "fail" && error === "already exist") {
-    //     alert("이미 가입된 번호입니다. 번호로 가입한 적이 없으시면 고객센터로 문의주세요.");
-    //   } else if (status === "fail" && error === "query error") {
-    //     alert("인증번호 발송에 실패 했습니다. 고객센터로 문의주세요.");
-    //   } else {
-    //     setAuthNumber({
-    //       ...authNumber,
-    //       authrizing: true,
-    //       number: res.data.authNumber
-    //     });
-    //     setFormValidtaionState({
-    //       ...formValidationState,
-    //       ["user-phone"]: true
-    //     });
-    //     console.log("res", res.data);
-    //   }
-    // })
-    // .catch(err => {
-    //   setFormValidtaionState({
-    //     ...formValidationState,
-    //     ["user-phone"]: false
-    //   });
-    //   console.log(err);
-    // });
   } else {
     alert("성함과 전화번호를 입력해주세요.");
   }
 };
-export const checkId = async id => {
+
+export const checkId = async (id) => {
   await axios({
     url: `${process.env.NEXT_PUBLIC_API_SERVER}/signin/id`,
     method: "get",
     params: {
-      userId: id
-    }
+      userId: id,
+    },
   })
-    .then(res => {
+    .then((res) => {
       if (res.data.status === "success") {
         setIsIdDuplicate(false);
         alert("사용할 수 있는 아이디입니다.");
@@ -59,18 +33,17 @@ export const checkId = async id => {
         alert("아이디가 중복됩니다.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };
 
 export const kakoLogin = async () => {
   Kakao.Auth.login({
-    success: authObj => {
+    success: (authObj) => {
       Kakao.API.request({
         url: "/v2/user/me",
-        success: async res => {
-          console.log("res", res);
+        success: async (res) => {
           const response = await axios({
             url: "http://localhost:3000/login/kakao",
             method: "POST",
@@ -78,13 +51,12 @@ export const kakoLogin = async () => {
               ...res,
               login_type: "kakao",
               email: res.kakao_account.email,
-              access_token: authObj.access_token
+              access_token: authObj.access_token,
             },
-            withCredentials: true
+            withCredentials: true,
           });
           const status = response.data.status;
           if (status === "success") {
-            //쿠키에 access token과 refresh toekn을 저장.
             window.localStorage.setItem("loggedInState", "loggedIn");
             Router.push("/");
           } else if (status === "signIn") {
@@ -94,12 +66,12 @@ export const kakoLogin = async () => {
             Router.push("/common/logIn");
           }
         },
-        fail: error => {
+        fail: (error) => {
           console.log(error);
-        }
+        },
       });
     },
-    fail: () => {}
+    fail: () => {},
   });
 };
 

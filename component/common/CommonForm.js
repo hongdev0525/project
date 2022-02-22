@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * formFieldList data format
- * 
+ *
  * {
     formTitle: "회원가입",
     formName: "signin",
@@ -23,7 +23,7 @@ import React from "react";
 			...props of input
 		}
       },
-      
+
     ]
   };
  */
@@ -40,7 +40,7 @@ const InputForm = ({ formFieldList }) => {
       {
         htmlFor: field,
         className: `${field}-label`,
-        key: `${field}-label${index}`
+        key: `${field}-label${index}`,
       },
       `${formField.label}`
     );
@@ -59,12 +59,9 @@ const InputForm = ({ formFieldList }) => {
 
 const CommonForm = ({ formDataList }) => {
   const formFieldList = formDataList.formFields;
-  console.log(formFieldList);
   return (
     <div className={`${formDataList.formName}-form`}>
-      <h1>
-        {formDataList.formTitle}
-      </h1>
+      <h1>{formDataList.formTitle}</h1>
       <InputForm formFieldList={formFieldList} />
     </div>
   );
