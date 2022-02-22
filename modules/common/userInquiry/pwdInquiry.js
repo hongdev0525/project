@@ -2,12 +2,26 @@ import { takeLatest } from "redux-saga/effects";
 import createRequestSage from "../../createRequestSaga";
 import { idExist, setPassword } from "/API/common/userInquiry";
 
+const PWDINQUIRY_INITIALIZE = "inquiry/PWDINQUIRY_INITIALIZE";
 const SET_NEW_PASSWORD = "inquiry/SET_NEW_PASSWORD";
 const SET_NEW_PASSWORD_SUCCESS = "inquiry/SET_NEW_PASSWORD_SUCCESS";
 const SET_NEW_PASSWORD_FAILURE = "inquiry/SET_NEW_PASSWORD_FAILURE";
 const ID_EXIST_CHECK = "inquiry/ID_EXIST_CHECK";
 const ID_EXIST_CHECK_SUCCESS = "inquiry/ID_EXIST_CHECK_SUCCESS";
 const ID_EXIST_CHECK_FAILURE = "inquiry/ID_EXIST_CHECK_FAILURE";
+
+export const pwdInquiryInitialize = () => {
+  return {
+    type: PWDINQUIRY_INITIALIZE,
+    payload: {
+      id: "",
+      isExist: "",
+      setDone: false,
+      pwdDuplicate: false,
+      error: ""
+    }
+  };
+};
 
 export const setNewPassword = (userId, userPassword) => {
   return {
@@ -31,7 +45,7 @@ export const idExistCheck = userId => {
 const idExistCheckSage = createRequestSage(ID_EXIST_CHECK, idExist);
 const setNewPasswordSage = createRequestSage(SET_NEW_PASSWORD, setPassword);
 
-export function* pwdinquirySaga() {
+export function* pwdInquirySaga() {
   yield takeLatest(ID_EXIST_CHECK, idExistCheckSage);
   yield takeLatest(SET_NEW_PASSWORD, setNewPasswordSage);
 }
@@ -47,6 +61,8 @@ let initialState = {
 /**Reducer */
 const PwdInquiry = (state = initialState, action) => {
   switch (action.type) {
+    case PWDINQUIRY_INITIALIZE:
+      return action.payload;
     case SET_NEW_PASSWORD_SUCCESS:
       if (action.payload.status === "fail") {
         return {
@@ -55,7 +71,7 @@ const PwdInquiry = (state = initialState, action) => {
           pwdDuplicate: action.payload.duplicate == true ? true : false
         };
       } else {
-        return { ...state, setDone: true };
+        return { ...state, setDone: true, pwdDuplicate: false };
       }
     case SET_NEW_PASSWORD_FAILURE:
       return { ...state, error: "API error occured" };

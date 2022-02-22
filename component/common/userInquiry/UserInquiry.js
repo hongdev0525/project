@@ -3,21 +3,17 @@ import { useDispatch } from "react-redux";
 import IdInquiry from "./IdInquiry";
 import PwdInquiry from "./PwdInquiry";
 import { authInitialize } from "/modules/common/login";
-
+import { idInquiryInitialize } from "../../../modules/common/userInquiry/idInquiry";
+import { pwdInquiryInitialize } from "../../../modules/common/userInquiry/pwdInquiry";
 const UserInquiry = ({ styles }) => {
   const dispatch = useDispatch();
-  const [tabMenuIndex, setTabMenuIndex] = useState(0);
+  const [tabMenuIndex, setTabMenuIndex] = useState(1);
   const handleTabMenu = index => {
     setTabMenuIndex(index);
     dispatch(authInitialize());
+    dispatch(idInquiryInitialize());
+    dispatch(pwdInquiryInitialize());
   };
-
-  useEffect(
-    () => {
-      console.log(tabMenuIndex);
-    },
-    [tabMenuIndex]
-  );
 
   return (
     <div className={styles["userInquiry-container"]}>

@@ -4,7 +4,7 @@ const createRequestSage = (type, request) => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return function*(action) {
-    console.log("action", action);
+    console.log("actionnnnnnnnnnnn:", action);
     try {
       const response = yield call(request, action.payload);
       yield put({

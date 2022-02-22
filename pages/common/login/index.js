@@ -3,7 +3,7 @@ import Router from "next/router";
 import LoginInput from "../../../component/common/LoginInput";
 import styles from "/styles/common/login.module.scss";
 import { kakoLogin } from "/API/common/login";
-
+import Link from "next/link";
 const Login = () => {
   const [loginState, setLoginState] = useState(false);
   const handleLogin = e => {
@@ -32,7 +32,10 @@ const Login = () => {
       {loginState === false &&
         <Fragment>
           <h1>로그인페이지</h1>
-          <LoginInput styles={styles} />
+          <div>
+            <LoginInput styles={styles} />
+            <Link href="/common/userInquiry">아이디/비밀번호 찾기</Link>
+          </div>
           <div onClick={e => handleLogin(e)}>
             <img
               src="https://k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
